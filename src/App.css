@@ -1,38 +1,71 @@
-.App {
-  text-align: center;
+.Title {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: xxx-large;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Column {
+    display:flex;
+    flex-direction:column
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Header {
+    background-color: transparent;
+    border: none;
+    color: red;
+    margin: 20px;
+    padding: 10px;
+    height: 30px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.HeaderActive {
+    background-color: transparent;
+    border: none;
+    color: red;
+    margin: 20px;
+    padding: 10px;
+    height: 30px;
+    font-size: xx-large;
 }
 
-.App-link {
-  color: #61dafb;
+.Header:hover {
+    font-size: xx-large;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Navbar {
+    width: 20%;
+    margin: 20px;
 }
+
+.ContentList {
+    width: 80%;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Row {
+    display: flex;
+    flex-direction: row;
+}
+
+.TopBar {
+    width: 90%;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: right;
+}
+
+.ContentBox {
+    
+}
+
+.Visible {
+    visibility: visible;
+}
+
+.Invisible {
+    visibility: hidden;
+    position: fixed;
+}
+
