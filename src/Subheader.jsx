@@ -8,7 +8,7 @@ class Subheader extends Component {
     render() { 
         let name=this.props.name
         return ( 
-            <h3>{name}</h3>
+            <h3 className="Subheader">{name}</h3>
          );
     }
 }

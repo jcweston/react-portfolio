@@ -6,9 +6,9 @@ import ContentList from './ContentList'
 
 class App extends Component {
     state = {
-      headers: ["Home","Overview","Projects","Studies","Pictures","Attributions","Contacts"],
+      headers: ["Home","Background","Projects","Studies","Pictures","Attributions","Contacts"],
       home: "Visible",
-      overview: "Invisible",
+      background: "Invisible",
       projects: "Invisible",
       studies: "Invisible",
       pictures: "Invisible",
@@ -19,28 +19,41 @@ class App extends Component {
     render () {
       return (
       <>
-        <div className="TopBar">
-          <Title />
-        </div>
-        <div className="Row">
-          <Navbar state={this.state} onClick={this.onClick}/>
-        <ContentList state={this.state} onClick={this.onClick}/>
+          <div className="TopBar">
+            <Title />
+          </div>
+          <div className="Row">
+            <Navbar 
+            state={this.state} 
+            onClick={this.onClick}
+            onClickHome={this.onClickHome}/>
+            <ContentList 
+            state={this.state} 
+            onClick={this.onClick}/>
         </div>
       </>)
     }
   
     onClick = (upperName) => {
       let name=upperName.toLowerCase()
+      let obj = {}
       if (this.state[name]==="Visible") {
-        let obj = {}
         obj[name]="Invisible"
-        this.setState(obj)
       }
       else {
-        let obj = {}
         obj[name]="Visible"
-        this.setState(obj)
       }
+      obj.home="Invisible"
+      this.setState(obj)
+    }
+
+    onClickHome = (upperName) => {
+      let obj={}
+      this.state.headers.forEach((x)=>{
+        obj[x.toLowerCase()]="Invisible"
+      })
+      obj.home="Visible"
+      this.setState(obj)
     }
 }
 
