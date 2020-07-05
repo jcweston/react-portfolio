@@ -1,11 +1,22 @@
 .Title {
     font-family: 'Courier New', Courier, monospace;
     font-size: xxx-large;
+    margin-top: 0px;
 }
 
 .Column {
     display:flex;
-    flex-direction:column
+    flex-direction:column;
+    margin: 0px;
+    padding: 0px;
+}
+
+.Link {
+    margin: 5px;
+}
+
+.ProjectText {
+    width:80%
 }
 
 .Header {
@@ -14,7 +25,23 @@
     color: red;
     margin: 20px;
     padding: 10px;
+    padding-left: 30px;
+    width: 130px;
+    border-top: grey solid 2px;
+    border-left: grey solid 2px;
+    margin-left: -2px;
+    border-top-left-radius: 10px;
     height: 30px;
+}
+
+.BoxHeader {
+    background-color: transparent;
+    border: none;
+    color: red;
+    height: 30px;
+    margin-top: 0px;
+    margin-left: -20px;
+    padding-left:0px
 }
 
 .HeaderActive {
@@ -23,8 +50,19 @@
     color: red;
     margin: 20px;
     padding: 10px;
+    padding-left: 30px;
+    width: 175px;
+    border-top: grey solid 2px;
+    border-left: grey solid 2px;
+    margin-left: -2px;
+    border-top-left-radius: 10px;
     height: 30px;
     font-size: xx-large;
+}
+
+.Subheader {
+    margin-left: -10px;
+    margin-bottom: 0px
 }
 
 .Header:hover {
@@ -34,6 +72,8 @@
 .Navbar {
     width: 20%;
     margin: 20px;
+    margin-top: 0px;
+    border-left: double grey 10px;
 }
 
 .ContentList {
@@ -44,8 +84,22 @@
 }
 
 .Row {
+    width: 95%;
     display: flex;
     flex-direction: row;
+}
+
+.ContentRow {
+    display: flex;
+    flex-direction: row;
+    margin: 0px;
+    padding: 0px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ProjectIcon {
+    width:50px;
 }
 
 .TopBar {
@@ -54,10 +108,15 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: right;
+    border-top: double grey 10px;
+    border-left: double grey 10px;
+    margin-top: 20px;
+    border-top-left-radius: 20px;
 }
 
 .ContentBox {
-    
+    padding-left: 20px;
+    margin-bottom: 10px;
 }
 
 .Visible {
