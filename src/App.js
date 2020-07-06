@@ -6,14 +6,15 @@ import ContentList from './ContentList'
 
 class App extends Component {
     state = {
-      headers: ["Home","Background","Projects","Studies","Pictures","Attributions","Contacts"],
+      headers: ["Home","Background","Projects","Studies","Attributions","Contact"],
       home: "Visible",
       background: "Invisible",
       projects: "Invisible",
       studies: "Invisible",
       pictures: "Invisible",
       attributions: "Invisible",
-      contacts: "Invisible"
+      contact: "Invisible",
+      priority:""
     } 
 
     render () {
@@ -29,7 +30,8 @@ class App extends Component {
             onClickHome={this.onClickHome}/>
             <ContentList 
             state={this.state} 
-            onClick={this.onClick}/>
+            onClick={this.onClick}
+            checkPriority={this.checkPriority}/>
         </div>
       </>)
     }
@@ -41,9 +43,10 @@ class App extends Component {
         obj[name]="Invisible"
       }
       else {
-        obj[name]="Visible"
+        obj[name]=`Visible`
       }
       obj.home="Invisible"
+      obj.priority=name
       this.setState(obj)
     }
 
@@ -54,6 +57,12 @@ class App extends Component {
       })
       obj.home="Visible"
       this.setState(obj)
+    }
+
+    checkPriority = (name) => {
+      if (this.state.priority===name) {
+        return ` , Priority`
+      } else {return ""}
     }
 }
 

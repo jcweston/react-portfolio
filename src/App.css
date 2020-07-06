@@ -99,7 +99,9 @@
 }
 
 .ProjectIcon {
-    width:50px;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 20px;
 }
 
 .TopBar {
@@ -116,15 +118,20 @@
 
 .ContentBox {
     padding-left: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
 }
 
 .Visible {
     visibility: visible;
+    order: 2
 }
 
 .Invisible {
     visibility: hidden;
     position: fixed;
+}
+
+.Priority {
+    order: 1;
 }
 

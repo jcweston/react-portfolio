@@ -7,11 +7,12 @@ class Navbar extends Component {
         this.state = {  }
     }
     render() { 
-        let state=this.props.state
+      let state=this.props.state
+      
         return ( 
             <div className="Column , Navbar">
             {state.headers.map((item,i)=>{
-              if (item!=="Home") {           
+              if (item!=="Home") {     
                 return (
                   <Header 
                     onClick={this.props.onClick} 
