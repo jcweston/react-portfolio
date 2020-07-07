@@ -3,7 +3,7 @@ import Clipboard from './Images/Clipboard.svg'
 import Spaceship from './Images/Spaceship.svg'
 import Blackjack from './Images/Card.svg'
 import Portfolio from './Images/Portfolio.svg'
-import ContentBox from './ContentBox';
+
 
 class Project extends Component {
     constructor(props) {
