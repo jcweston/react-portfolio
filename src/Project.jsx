@@ -18,6 +18,16 @@ class Project extends Component {
             Portfolio:Portfolio
         }
         let img=obj[this.props.image]
+        let gitHub="GitHub"
+        let link="Link"
+
+        if (this.props.link==="X") {
+            link=""
+        }
+        if (this.props.gitHub==="X") {
+            gitHub=""
+        }
+
         return (
             <div className="ContentRow">
                 <a href={this.props.link}>
@@ -28,8 +38,8 @@ class Project extends Component {
                 </a>
                 
                 <div className="Column">
-                    <a href={this.props.link}><h5 className="Link">Link</h5></a>
-                    <a href={this.props.gitHub}><h5 className="Link">GitHub</h5></a> 
+                    <a href={this.props.link}><h5 className="Link">{link}</h5></a>
+                    <a href={this.props.gitHub}><h5 className="Link">{gitHub}</h5></a> 
                 </div>
                 
             </div>
