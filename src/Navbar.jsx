@@ -11,8 +11,7 @@ class Navbar extends Component {
       
         return ( 
             <div className="Column , Navbar">
-            {state.headers.map((item,i)=>{
-              if (item!=="Home") {     
+            {state.headers.map((item,i)=>{  
                 return (
                   <Header 
                     onClick={this.props.onClick} 
@@ -20,15 +19,7 @@ class Navbar extends Component {
                     visibility={state[item.toLowerCase()]} 
                     key={i} />
                 )}
-              else {
-                return (
-                  <Header 
-                    onClick={this.props.onClickHome} 
-                    name={item} 
-                    visibility={state[item.toLowerCase()]}
-                    key={i} />
-                )}
-              })} 
+              )} 
             </div>
          );
     }

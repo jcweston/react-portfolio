@@ -1,8 +1,9 @@
 .Title {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: xxx-large;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 400%;
     margin-top: 0px;
-    padding-right: 125px
+    padding-right: 5%;
+    opacity: 60%;
 }
 
 .Column {
@@ -10,6 +11,7 @@
     flex-direction:column;
     margin: 0px;
     padding: 0px;
+    width:20%
 }
 
 .Link {
@@ -75,6 +77,12 @@
     margin: 20px;
     margin-top: 0px;
     border-left: double grey 10px;
+}
+
+@media only screen and (max-width:200px) {
+    Navbar {
+        visibility: hidden;
+    }
 }
 
 .ContentList {

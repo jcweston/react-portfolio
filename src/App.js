@@ -14,7 +14,7 @@ class App extends Component {
       pictures: "Invisible",
       attributions: "Invisible",
       contact: "Invisible",
-      priority:""
+      open:""
     } 
 
     render () {
@@ -26,8 +26,7 @@ class App extends Component {
           <div className="Row">
             <Navbar 
             state={this.state} 
-            onClick={this.onClick}
-            onClickHome={this.onClickHome}/>
+            onClick={this.onClick} />
             <ContentList 
             state={this.state} 
             onClick={this.onClick}
@@ -39,23 +38,11 @@ class App extends Component {
     onClick = (upperName) => {
       let name=upperName.toLowerCase()
       let obj = {}
-      if (this.state[name]==="Visible") {
-        obj[name]="Invisible"
-      }
-      else {
-        obj[name]=`Visible`
-      }
-      obj.home="Invisible"
-      obj.priority=name
-      this.setState(obj)
-    }
-
-    onClickHome = (upperName) => {
-      let obj={}
-      this.state.headers.forEach((x)=>{
-        obj[x.toLowerCase()]="Invisible"
-      })
-      obj.home="Visible"
+      this.state.headers.forEach(x => {
+        let y=x.toLowerCase()
+        obj[y]="Invisible"
+      });
+      obj[name]=`Visible`
       this.setState(obj)
     }
 

@@ -78,9 +78,8 @@ class ContentList extends Component {
 
               <div className={`ContentBox , ${state.attributions}${check("attributions")}`} id="Attributions">
               <h2 className="BoxHeader">Attributions</h2>
-                <Subheader name="Placeholder" />
+                <Subheader name="Icons" />
                 <p> Icons attributed to <a href="https://fontawesome.com/license">Fontawesome.io</a></p>
-                <p>Thanks to Ian Willshaw for design advice</p>
               </div>
               <div className={`ContentBox , ${state.contact}${check("contact")}`} id="Contact">
               <h2 className="BoxHeader">Contact</h2>
