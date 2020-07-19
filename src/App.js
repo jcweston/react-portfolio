@@ -3,6 +3,7 @@ import './App.css';
 import Title from './Title'
 import Navbar from './Navbar'
 import ContentList from './ContentList'
+import Dropdown from './Dropdown'
 
 class App extends Component {
     state = {
@@ -22,8 +23,12 @@ class App extends Component {
       <>
           <div className="TopBar">
             <Title />
+            <Dropdown 
+            onClick={this.dropdownClick}
+            headers={this.state.headers} />
           </div>
           <div className="Row">
+            
             <Navbar 
             state={this.state} 
             onClick={this.onClick} />
@@ -35,6 +40,10 @@ class App extends Component {
       </>)
     }
   
+    dropdownClick = (name) => {
+      console.log(name)
+    }
+
     onClick = (upperName) => {
       let name=upperName.toLowerCase()
       let obj = {}

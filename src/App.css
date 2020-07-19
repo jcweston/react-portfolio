@@ -3,15 +3,15 @@
     font-size: 400%;
     margin-top: 0px;
     padding-right: 5%;
+    margin-left: 20px;
+    width: fit-content;
     color: rgb(41, 41, 41);
 }
 
 .Column {
     display:flex;
     flex-direction:column;
-    margin: 0px;
-    padding: 0px;
-    width:20%
+    
 }
 
 .Link {
@@ -32,7 +32,7 @@
     width: 130px;
     border-top: grey solid 2px;
     border-left: grey solid 2px;
-    margin-left: -2px;
+    margin-left: 7px;
     border-top-left-radius: 10px;
     height: 30px;
 }
@@ -74,15 +74,8 @@
 
 .Navbar {
     width: 20%;
-    margin: 20px;
+    margin: 10px;
     margin-top: 0px;
-    border-left: double grey 10px;
-}
-
-@media only screen and (max-width:200px) {
-    Navbar {
-        visibility: hidden;
-    }
 }
 
 .ContentList {
@@ -95,16 +88,23 @@
 .Row {
     width: 95%;
     display: flex;
+    margin-left: 20px;
     flex-direction: row;
+    border-left: double grey 10px;
 }
 
 .ContentRow {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     margin: 0px;
     padding: 0px;
     align-items: center;
     justify-content: space-between;
+}
+
+.Link {
+    margin: 10px;
 }
 
 .ProjectIcon {
@@ -145,3 +145,28 @@
     order: 1;
 }
 
+.Dropdown {
+    margin: 20px;
+    visibility: hidden;
+}
+
+@media only screen and (max-width:800px) {
+    
+    .Row {
+        flex-direction: column;
+    }
+
+    .Navbar {
+        width: 95%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .Header {
+        margin: 10px;
+        padding: 10px;
+        
+        height: 20px;
+    }
+}
