@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from '@reach/router'
 
 class Header extends Component {
   constructor(props) {
@@ -7,30 +8,20 @@ class Header extends Component {
   }
   render() { 
     let name=this.props.name
-    let onClick=this.props.onClick
-    let visibility=this.props.visibility
-    if (visibility==="Visible") {
+    let linkName=name.toLowerCase()
+   
       return ( 
-        <h2 
-          className="HeaderActive" 
-          onClick={e=>onClick(name)}>
-            {name}
-        </h2>
+        <Link to={`/${linkName}`}>
+          <h2 
+            className="HeaderActive" 
+            // onClick={e=>onClick(name)}
+            >
+              {name}
+          </h2>
+        </Link>
+        
        );
-
-
-    }
-    else {
-      return ( 
-      <h2 
-        className="Header" 
-        onClick={e=>onClick(name)}>
-          {name}
-      </h2>
-     );
-    }
-    
-  }
+    } 
 }
  
 export default Header;

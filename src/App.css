@@ -73,16 +73,19 @@
 }
 
 .Navbar {
-    width: 20%;
+    width: 250px;
     margin: 10px;
     margin-top: 0px;
 }
 
 .ContentList {
-    width: 80%;
     margin: 20px;
     display: flex;
     flex-direction: column;
+}
+
+a {
+    text-decoration: none;
 }
 
 .Row {

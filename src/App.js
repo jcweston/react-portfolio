@@ -8,13 +8,13 @@ import Dropdown from './Dropdown'
 class App extends Component {
     state = {
       headers: ["Home","Background","Projects","Studies","Attributions","Contact"],
-      home: "Visible",
-      background: "Invisible",
-      projects: "Invisible",
-      studies: "Invisible",
-      pictures: "Invisible",
-      attributions: "Invisible",
-      contact: "Invisible",
+      // home: "Visible",
+      // background: "Invisible",
+      // projects: "Invisible",
+      // studies: "Invisible",
+      // pictures: "Invisible",
+      // attributions: "Invisible",
+      // contact: "Invisible",
       open:""
     } 
 
