@@ -15,24 +15,37 @@ class ContentList extends Component {
         this.state = {  }
     }
     render() { 
-        let state=this.props.state
-        let check=this.props.checkPriority
         return ( 
             <Router className="Column , ContentList">
               <Home 
-                path='/home' 
-                className={`ContentBox , ${state.home}`} 
+                path='/' 
+                className='ContentBox'
                 id="Home" />
 
-              <Background path='/background' className={`ContentBox , ${state.background}${check("background")}`} id="Background" />
+              <Background 
+                path='/background' 
+                className='ContentBox'
+                id="Background" />
 
-              <Projects path='/projects' className={`ContentBox , ${state.projects}${check("projects")}`}id="Projects" />
+              <Projects 
+                path='/projects' 
+                className='ContentBox'
+                id="Projects" />
 
-              <Studies path='/studies' className={`ContentBox , ${state.studies}${check("studies")}`} id="Studies" />
+              <Studies 
+                path='/studies' 
+                className='ContentBox'
+                id="Studies" />
               
-              <Attributions path='/attributions' className={`ContentBox , ${state.attributions}${check("attributions")}`} id="Attributions" />
+              <Attributions 
+                path='/attributions' 
+                className='ContentBox'
+                id="Attributions" />
               
-              <Contact path='/contact' className={`ContentBox , ${state.contact}${check("contact")}`} id="Contact" />
+              <Contact 
+              path='/contact' 
+              className='ContentBox'
+              id="Contact" />
 
               <Blackjack path='/blackjack' />
 

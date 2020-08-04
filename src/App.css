@@ -136,7 +136,7 @@ a {
 
 .Visible {
     visibility: visible;
-    order: 2
+
 }
 
 .Invisible {
@@ -144,9 +144,6 @@ a {
     position: fixed;
 }
 
-.Priority {
-    order: 1;
-}
 
 .Dropdown {
     margin: 20px;

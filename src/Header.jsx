@@ -9,12 +9,14 @@ class Header extends Component {
   render() { 
     let name=this.props.name
     let linkName=name.toLowerCase()
+    if (name==='Home') {
+      linkName=''
+    }
    
       return ( 
         <Link to={`/${linkName}`}>
           <h2 
             className="HeaderActive" 
-            // onClick={e=>onClick(name)}
             >
               {name}
           </h2>
