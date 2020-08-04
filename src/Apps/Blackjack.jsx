@@ -18,7 +18,7 @@ class Blackjack extends Component {
     }
     render() {
         let loadText="" 
-        if (this.state.isLoading == true) {
+        if (this.state.isLoading === true) {
             loadText="Loading"
         }
         return ( 

@@ -19,8 +19,8 @@ class Project extends Component {
          this.gitHub="GitHub"
     }
     render() { 
-        let gitHub="GitHub"
-        let link="Link"
+        // let gitHub="GitHub"
+        // let link="Link"
 
         if (this.props.link==="X") {
             this.link=""
@@ -39,7 +39,7 @@ class Project extends Component {
 
     linkSelect = () => {
         const img=this.state[this.props.image]
-        if (this.props.linkType=="external") {
+        if (this.props.linkType === "external") {
             return (
                 <div>
                    <a href={this.props.link}>

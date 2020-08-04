@@ -1,5 +1,4 @@
 import React from 'react';
-import Subheader from '../Subheader'
 
 const Contact = () => {
     return ( 
