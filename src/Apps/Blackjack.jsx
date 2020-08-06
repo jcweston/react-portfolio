@@ -4,14 +4,16 @@ class Blackjack extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            gameInProgress: true,
+            gameInProgress: false,
             isLoading: false,
             deck: [],
             dealerHand: [],
             dealerValue: 0,
             playerHand: [],
             playerValue: 0,
-            playerBust: false
+            playerBust: false,
+            stay: false,
+            logArr: []
         }
         this.fullDeck = [
                     ['AceSpades',1],['2Spades',2],['3Spades',3],['4Spades',4],['5Spades',5],['6Spades',6],['7Spades',7],['8Spades',8],['9Spades',9],['10Spades',10],['JackSpades',10],['QueenSpades',10],['KingSpades',10],
@@ -40,25 +42,53 @@ class Blackjack extends Component {
 
                 <div className={gameVisibility}>
                     <p>Cards remaining in Deck: {this.state.deck.length}</p>
-                    <h4>Dealer's Hand</h4>
-                    <p>Hand Value</p>
+                    <h4>Dealer's Hand:
+                        {this.state.dealerHand.map((card)=>{
+                            return card[0]
+                        })}
+                    </h4>
+                    <p>Hand Value: {this.state.dealerValue}
+                    </p>
                     <h4>Player's Hand: 
                         {this.state.playerHand.map((card)=>{
                             return card[0]
                         })}
                     </h4>
                     <p>Hand Value: {this.state.playerValue}</p>
+                    {this.hitButton()}
+                    {this.stayButton()}
+                    
                     <button
-                        onClick={()=>this.onHit()}
-                        >Hit</button>
-                    <button
-                        onClick={()=>this.onStay()}
-                        >Stay</button>  
-                    <button>New Hand</button>
+                        onClick = {()=>this.newHand()}
+                        >New Hand</button>
 
                 </div>
             </>
          );
+    }
+
+    stayButton = () => {
+        if (this.state.playerBust||this.state.stay) {
+            return
+        } else {
+            return (
+                <button
+                    onClick={()=>this.onStay()}
+                >Stay</button>  
+            )
+        }
+    }
+
+    hitButton = () => {
+        if (this.state.playerBust||this.state.stay) {
+            return
+        } else {
+            return (
+                <button
+                    onClick={()=>this.onHit()}
+                >Hit</button>  
+            )
+        }
     }
 
     onHit = () => {
@@ -66,9 +96,8 @@ class Blackjack extends Component {
         let hand=this.state.playerHand
         let value=this.state.playerValue
         let card=arr.pop()
-        hand.push(card)
-        console.log(card)
         value+=card[1]
+        hand.push(card)
         let bust = false
         if (value>=22){
             bust = true
@@ -78,21 +107,67 @@ class Blackjack extends Component {
             playerHand:hand,
             playerValue:value,
             playerBust:bust
+        }, this.checkWin())
+    }
+
+    newHand = () => {
+        this.setState({
+            playerHand:[],
+            playerValue: 0,
+            dealerHand:[],
+            dealerValue: 0,
+            stay: false,
+            playerBust: false
         })
     }
 
-    onStay = () => {
-
+    checkWin = () => {
+        const playerValue=this.state.playerValue
+        const dealerValue=this.state.dealerValue
+        if (this.state.stay||this.state.bust) {
+            if (playerValue>21) {
+                console.log("Player Bust")
+            } else if (dealerValue>21) {
+                console.log("Dealer Bust")
+            } else if (playerValue>dealerValue) {
+                console.log("Player Wins")
+            } else {
+                console.log("Dealer Wins")
+            }
+        }
+    }
+   
+    
+    onStay = (value=0,stop=false) => {
+        if(stop===true){
+            this.setState({
+                dealerValue:value,
+                stay:true
+            },this.checkWin())
+            return
+        }
+        let arr = this.state.deck
+        let hand = this.state.dealerHand
+        let card = arr.pop()
+        let add = card[1]+value
+        if (add>=17){
+            stop=true
+        }
+        hand.push(card)
+        this.setState({
+            deck:arr,
+            dealerHand:hand
+        },this.onStay(add,stop))
+        
     }
 
     shuffleDeck = () => {
+        this.newHand()
         let arr=[...this.shuffleArr(this.fullDeck)]
         this.setState({
            deck:arr,
            gameInProgress: true
-        },()=>{
-                console.log(this.state.deck)
-            })
+        })
             return arr;
     }
 
