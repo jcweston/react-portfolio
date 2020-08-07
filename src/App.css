@@ -8,6 +8,15 @@
     color: rgb(41, 41, 41);
 }
 
+.blackjackApp {
+    display: flex;
+    flex-direction: row;
+}
+
+.blackjackLog {
+    margin-top: 50px;
+}
+
 .Column {
     display:flex;
     flex-direction:column;

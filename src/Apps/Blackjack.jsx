@@ -13,7 +13,10 @@ class Blackjack extends Component {
             playerValue: 0,
             playerBust: false,
             stay: false,
-            logArr: []
+            win: false,
+            lose: false,
+            logArr: [],
+            blackjack: false
         }
         this.fullDeck = [
                     ['AceSpades',1],['2Spades',2],['3Spades',3],['4Spades',4],['5Spades',5],['6Spades',6],['7Spades',7],['8Spades',8],['9Spades',9],['10Spades',10],['JackSpades',10],['QueenSpades',10],['KingSpades',10],
@@ -23,52 +26,59 @@ class Blackjack extends Component {
                 ]         
     }
     render() {
-        let loadText="" 
-        if (this.state.isLoading) {
-            loadText="Loading"
+        let resultText="" 
+        if (this.state.win) {
+            resultText="Win!"
+        } else if (this.state.lose) {
+            resultText="Lose!"
         }
         let gameVisibility='Invisible'
         if (this.state.gameInProgress) {
             gameVisibility='Visible'
         }
         return ( 
-            <>
-                <h2>Blackjack</h2>
-                <h3><em>Currently recreating in React, not all functionality implemented</em></h3>
-                <p>{loadText}</p>
-                
-
-                <button onClick={()=>this.shuffleDeck()}>New Game (Shuffle Deck)</button>
-
-                <div className={gameVisibility}>
-                    <p>Cards remaining in Deck: {this.state.deck.length}</p>
-                    <h4>Dealer's Hand:
-                        {this.state.dealerHand.map((card)=>{
-                            return card[0]
+            <div className='blackjackApp'>
+                <div className='blackjackControls'>
+                    <h2>Blackjack</h2>
+                    <button onClick={()=>this.shuffleDeck()}>New Game (Shuffle Deck)</button>
+                    <div className={gameVisibility}>
+                        <p>Cards remaining in Deck: {this.state.deck.length}</p>
+                        <h4>Dealer's Hand:
+                            {this.state.dealerHand.map((card)=>{
+                                return " " + card[0]
+                            })}
+                        </h4>
+                        <p>Hand Value: {this.state.dealerValue}
+                        </p>
+                        <h4>Player's Hand: 
+                            {this.state.playerHand.map((card)=>{
+                                return " " + card[0]
+                            })}
+                        </h4>
+                        <p>Hand Value: {this.state.playerValue}</p>
+                        {this.hitButton()}
+                        {this.stayButton()}
+                        <button
+                            onClick = {()=>this.newHand()}
+                            >New Hand</button>
+                    </div>
+                </div>
+                <div className='blackjackLog'>
+                    <h3>{resultText}</h3>
+                    <div className="log">
+                        {this.state.logArr.map((element, i)=>{
+                            return (<p key={i}>{element}</p>)
                         })}
-                    </h4>
-                    <p>Hand Value: {this.state.dealerValue}
-                    </p>
-                    <h4>Player's Hand: 
-                        {this.state.playerHand.map((card)=>{
-                            return card[0]
-                        })}
-                    </h4>
-                    <p>Hand Value: {this.state.playerValue}</p>
-                    {this.hitButton()}
-                    {this.stayButton()}
-                    
-                    <button
-                        onClick = {()=>this.newHand()}
-                        >New Hand</button>
+                    </div>
+                </div>
 
                 </div>
-            </>
+            
          );
     }
 
     stayButton = () => {
-        if (this.state.playerBust||this.state.stay) {
+        if (this.state.playerBust||this.state.stay||this.state.blackjack) {
             return
         } else {
             return (
@@ -80,7 +90,7 @@ class Blackjack extends Component {
     }
 
     hitButton = () => {
-        if (this.state.playerBust||this.state.stay) {
+        if (this.state.playerBust||this.state.stay||this.state.blackjack) {
             return
         } else {
             return (
@@ -99,15 +109,25 @@ class Blackjack extends Component {
         value+=card[1]
         hand.push(card)
         let bust = false
-        if (value>=22){
+        let blackjack = false
+        let lose = false
+        let win = false
+        if (value>21){
             bust = true
+            lose = true
+        } else if (value===21) {
+            win = true
+            blackjack = true
         }
         this.setState({
             deck:arr,
             playerHand:hand,
             playerValue:value,
-            playerBust:bust
-        }, this.checkWin())
+            playerBust:bust,
+            lose:lose,
+            win:win,
+            blackjack:blackjack
+        }, ()=>this.checkWin())
     }
 
     newHand = () => {
@@ -117,24 +137,46 @@ class Blackjack extends Component {
             dealerHand:[],
             dealerValue: 0,
             stay: false,
-            playerBust: false
+            playerBust: false,
+            lose: false,
+            win: false,
+            blackjack:false
         })
     }
 
     checkWin = () => {
         const playerValue=this.state.playerValue
         const dealerValue=this.state.dealerValue
-        if (this.state.stay||this.state.bust) {
+        console.log(playerValue)
+        console.log(dealerValue)
             if (playerValue>21) {
-                console.log("Player Bust")
+                this.addToLog("Player Bust",'lose')
             } else if (dealerValue>21) {
-                console.log("Dealer Bust")
-            } else if (playerValue>dealerValue) {
-                console.log("Player Wins")
-            } else {
-                console.log("Dealer Wins")
+                this.addToLog("Dealer Bust", 'win')
+            } else if (playerValue>dealerValue&&this.state.stay) {
+                this.addToLog("Player Wins", 'win')
+            } else if (playerValue===21) {
+                this.addToLog("Blackjack!",'win')
+            } else if (this.state.stay) {
+                this.addToLog("Dealer Wins", 'lose')
             }
+    }
+
+    addToLog = (text, result) => {
+        let win = false
+        let lose = false
+        let arr = this.state.logArr
+        arr.push(text)
+        if (result==="win") {
+            win=true
+        } else if (result==='lose') {
+            lose=true
         }
+        this.setState({
+            logArr:arr,
+            win: win,
+            lose: lose
+        })
     }
    
     
@@ -143,7 +185,7 @@ class Blackjack extends Component {
             this.setState({
                 dealerValue:value,
                 stay:true
-            },this.checkWin())
+            },() => this.checkWin())
             return
         }
         let arr = this.state.deck
