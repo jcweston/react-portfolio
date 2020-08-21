@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Task from './Task'
+import CompletedTask from './CompletedTask'
 
 class ToDo extends Component {
     constructor(props) {
         super(props);
         this.state = { 
             formValue:"",
-            tasks:[]
+            tasks:[],
+            completed:[]
          }
     }
     render() { 
@@ -25,34 +27,64 @@ class ToDo extends Component {
                     <Task 
                         key={i}
                         task={task}
-                        deleteTask={this.deleteTask}/>
+                        deleteTask={this.deleteTask}
+                        taskCompleted={this.taskCompleted}/>
                 )})}
-            </div>    
+                {this.state.completed.map((task,i) => {
+                return (
+                    <CompletedTask 
+                        key={i}
+                        task={task}
+                        deleteTask={this.deleteTask}
+                        taskCompleted={this.taskCompleted}/>
+                )})}
+            </div>
+            <button onClick={this.deleteStorage}>Clear Storage</button>    
         </>
          );
     }
 
-    // componentDidMount = () => {
-    //     const arr = localStorage.getItem('tasks')
-    //     console.log(arr)
-    //     if(arr) {
-    //       this.setState({
-    //         tasks:arr
-    //        })
-    //     }
-    // }
+    componentDidMount = () => {
+        let arr = this.retrieveStorage('tasks')
+        console.log(arr)
+        
+          this.setState({
+            tasks:arr
+           })
+        
+    }
+
+    retrieveStorage = (type) => {
+        let string = localStorage.getItem(type)
+        if (string===null) {
+            return []
+        }
+        return string.split('%%')
+    }
+
+    saveStorage = (arr,type) => {
+        const storageString=arr.join('%%')
+        localStorage.clear()
+        localStorage.setItem(type,storageString)
+    }
 
     onSubmit = (event) => {
-        console.log(this.state)
         event.preventDefault()
         const newTask=this.state.formValue
         let arr=this.state.tasks
         arr.push(newTask)
-        // localStorage.setItem('tasks',[...arr])
+        this.saveStorage(arr,'tasks')
         this.setState(
             {tasks:arr,
             formValue:""}
         )
+    }
+
+    deleteStorage = () => {
+        localStorage.clear()
+        this.setState ({
+            tasks:[]
+        })
     }
 
     onChange = (event) => {
@@ -72,6 +104,16 @@ class ToDo extends Component {
         this.setState({
             tasks:arr
         })
+        this.saveStorage(arr)
+    }
+
+    taskCompleted = (task) => {
+        let obj=this.state
+        for (let i = 0; i < obj.tasks.length; i++) {
+            if (obj.tasks[i]===task)
+            obj.completed.push(obj.tasks.splice(i,1)[0])
+        }
+        this.setState({obj},console.log(this.state))
     }
 }
  

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import deleteImg from '../Images/Delete.svg'
 
-class Task extends Component {
+class CompletedTask extends Component {
     constructor(props) {
         super(props);
         this.state = { 
@@ -15,7 +15,7 @@ class Task extends Component {
                 <button onClick={()=>this.props.deleteTask(this.props.task)}>
                     X
                 </button>
-                <p className="taskText">{this.props.task}</p>
+                <p className="taskText"><s>{this.props.task}</s></p>
                 <button onClick={()=>this.props.taskCompleted(this.props.task)}>Completed</button>
             </div>
             
@@ -23,4 +23,4 @@ class Task extends Component {
     }
 }
  
-export default Task;
+export default CompletedTask;
