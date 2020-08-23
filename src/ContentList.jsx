@@ -52,7 +52,7 @@ class ContentList extends Component {
 
               <ToDo path='/toDo' />
 
-              <ApiCallApp path='/api' />
+              <ApiCallApp path='/api/*' />
               
             </Router>
          );

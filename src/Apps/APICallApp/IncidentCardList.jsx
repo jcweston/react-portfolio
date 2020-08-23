@@ -14,7 +14,6 @@ class IncidentCardList extends Component {
                 </h3>
             )
         } else {
-            console.log(this.props)
             return (
               <>
                 {this.props.temp && <IncidentCard data={this.props.temp} />}

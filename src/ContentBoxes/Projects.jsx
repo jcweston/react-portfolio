@@ -40,13 +40,13 @@ const Projects = () => {
                       gitHub="X" />
                   <p className="ProjectText">My first major project using React, this app also required me to become very familiar with HTML Canvas.<br></br>An app designed for science-fiction fans, the Spaceship Designer takes input from a few slider bars and generates a detailed cutaway spaceship image, which can be randomized for variety, then saved as a jpeg image.</p>
                   </div>
-                  <Subheader name="Api Call Project" />
+                  <Subheader name="BikeWise API" />
                 <div className="ContentRow">
                     <Project 
                       image="Bike" 
                       link="/api" 
                       gitHub="X" />
-                  <p className="ProjectText">A project involving making API calls and visualising data.<br></br>A searchable list of bike incidents.</p>
+                  <p className="ProjectText">A project involving axios calls to the BikeWise bike incident api and visualising the incident data.<br></br>New incidents can be 'added', though nothing is actually posted to the api.</p>
                   </div>
         </div>
      );

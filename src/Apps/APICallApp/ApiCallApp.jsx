@@ -7,7 +7,6 @@ import Table from './Table'
 
 import axios from 'axios';
 import { Router } from '@reach/router'
-import IncidentCard from './IncidentCard';
 import Incident from './Incident'
 import NewIncident from './NewIncident';
 
@@ -26,7 +25,7 @@ class App extends Component {
       <div className="App">
       <Header />
       <Router>
-        <NewIncident path="/new"/>
+       <Incident path="incident/:id"/>
         <Table 
           path="/" 
           page={this.state.page}
@@ -35,7 +34,7 @@ class App extends Component {
          isLoading = {this.state.isLoading}
          data = {this.state.data.incidents}/>
         <Graph path="/graph"/>
-        <Incident path="/incident/:id"/>
+        
       </Router>
       
       

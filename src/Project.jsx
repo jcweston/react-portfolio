@@ -4,6 +4,7 @@ import Clipboard from './Images/Clipboard.svg'
 import Spaceship from './Images/Spaceship.svg'
 import Blackjack from './Images/Card.svg'
 import Portfolio from './Images/Portfolio.svg'
+import Bike from './Images/Bike.svg'
 
 
 class Project extends Component {
@@ -13,7 +14,8 @@ class Project extends Component {
             Clipboard:Clipboard,
             Spaceship:Spaceship,
             Blackjack:Blackjack,
-            Portfolio:Portfolio
+            Portfolio:Portfolio,
+            Bike:Bike
          }
          this.link="Link"
          this.gitHub="GitHub"

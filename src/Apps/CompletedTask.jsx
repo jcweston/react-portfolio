@@ -12,8 +12,8 @@ class CompletedTask extends Component {
         const deleteImg=this.state.deleteImg
         return ( 
             <div className="taskCard">
-                <button onClick={()=>this.props.deleteTask(this.props.task)}>
-                    X
+                <button onClick={()=>this.props.deleteTask(this.props.task)} className="deleteButton">
+                <img src={deleteImg} alt="delete image" />
                 </button>
                 <p className="taskText"><s>{this.props.task}</s></p>
                 <button onClick={()=>this.props.taskCompleted(this.props.task)}>Completed</button>

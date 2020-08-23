@@ -6,17 +6,17 @@ const Header = () => {
         <div>
             <h1>Bike Incidents</h1>
             <nav>
-                <Link to="/">
+                <Link to="./">
                     <button>
                         Home
                     </button>
                 </Link>
-                <Link to="/graph">
+                <Link to="graph">
                     <button>
                         Graph
                     </button>
                 </Link>
-                <Link to="/new">
+                <Link to="new">
                     <button>
                         New
                     </button>
