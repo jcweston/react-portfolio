@@ -19,8 +19,6 @@ class Project extends Component {
          this.gitHub="GitHub"
     }
     render() { 
-        // let gitHub="GitHub"
-        // let link="Link"
 
         if (this.props.link==="X") {
             this.link=""

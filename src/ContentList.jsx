@@ -8,6 +8,7 @@ import Studies from './ContentBoxes/Studies'
 import Attributions from './ContentBoxes/Attributions'
 import Contact from './ContentBoxes/Contact'
 import Blackjack from './Apps/Blackjack.jsx';
+import ApiCallApp from './Apps/APICallApp/ApiCallApp'
 
 class ContentList extends Component {
     constructor(props) {
@@ -50,6 +51,8 @@ class ContentList extends Component {
               <Blackjack path='/blackjack' />
 
               <ToDo path='/toDo' />
+
+              <ApiCallApp path='/api' />
               
             </Router>
          );
