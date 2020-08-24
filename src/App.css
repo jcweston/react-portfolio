@@ -8,6 +8,11 @@
     color: rgb(41, 41, 41);
 }
 
+.FlexRow {
+    display: flex;
+    flex-direction: row;
+}
+
 .taskCard {
     display: flex;
     flex-direction: row;

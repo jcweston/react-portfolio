@@ -9,6 +9,10 @@ class Task extends Component {
          }
     }
     render() { 
+        if (this.props.task==="") {
+            return null
+        }
+        else {
         const deleteImg=this.state.deleteImg
         return ( 
             <div className="taskCard">
@@ -20,7 +24,7 @@ class Task extends Component {
             </div>
             
          );
-    }
+    }}
 }
  
 export default Task;

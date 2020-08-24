@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Task from './Task'
 import CompletedTask from './CompletedTask'
+import StateView from '../StateView'
 
 class ToDo extends Component {
     constructor(props) {
@@ -40,16 +41,17 @@ class ToDo extends Component {
                 )})}
             </div>
             <button onClick={this.deleteStorage}>Clear Storage</button>    
+            
         </>
          );
     }
 
     componentDidMount = () => {
         let arr = this.retrieveStorage('tasks')
-        console.log(arr)
-        
+        let completedArr = this.retrieveStorage('completed')
           this.setState({
-            tasks:arr
+            tasks:arr,
+            completed:completedArr
            })
         
     }
@@ -62,10 +64,13 @@ class ToDo extends Component {
         return string.split('%%')
     }
 
-    saveStorage = (arr,type) => {
-        const storageString=arr.join('%%')
+    saveStorage = () => {
+        const tasksStorage=this.state.tasks.join('%%')
+        const completedStorage=this.state.completed.join('%%')
+        console.log(this.state)
         localStorage.clear()
-        localStorage.setItem(type,storageString)
+        localStorage.setItem('tasks',tasksStorage)
+        localStorage.setItem('completed',completedStorage)
     }
 
     onSubmit = (event) => {
@@ -73,17 +78,17 @@ class ToDo extends Component {
         const newTask=this.state.formValue
         let arr=this.state.tasks
         arr.push(newTask)
-        this.saveStorage(arr,'tasks')
+        this.saveStorage()
         this.setState(
             {tasks:arr,
-            formValue:""}
-        )
+            formValue:""},this.saveStorage())
     }
 
     deleteStorage = () => {
         localStorage.clear()
         this.setState ({
-            tasks:[]
+            tasks:[],
+            completed:[]
         })
     }
 
@@ -96,24 +101,39 @@ class ToDo extends Component {
 
     deleteTask = (task) => {
         let arr=this.state.tasks
+        let completedArr=this.state.completed
         for (let i = 0; i < arr.length; i++) {
             if (arr[i]===task) {
                 arr.splice(i,1)
             } 
         }
+        for (let i = 0; i<completedArr.length; i++) {
+            if (completedArr[i]===task) {
+                completedArr.splice(i,1)
+            }
+        }
         this.setState({
-            tasks:arr
-        })
-        this.saveStorage(arr)
+            tasks:arr,
+            completed:completedArr
+        }, this.saveStorage())
+        
     }
 
     taskCompleted = (task) => {
         let obj=this.state
+        let complete = false
         for (let i = 0; i < obj.tasks.length; i++) {
-            if (obj.tasks[i]===task)
-            obj.completed.push(obj.tasks.splice(i,1)[0])
+            if (obj.tasks[i]===task) {
+              obj.completed.push(obj.tasks.splice(i,1)[0]) 
+              complete=true 
+            }
+            
         }
-        this.setState({obj},console.log(this.state))
+        for (let i = 0; i < obj.completed.length; i++) {
+            if (complete===false && obj.completed[i]===task)
+            obj.tasks.push(obj.completed.splice(i,1)[0])
+        }
+        this.setState({obj},this.saveStorage())
     }
 }
  

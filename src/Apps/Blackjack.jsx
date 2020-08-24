@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import BlackjackCard from './BlackjackCard'
+import FlexRow from '../FlexRow'
 
 class Blackjack extends Component {
     constructor(props) {
@@ -16,13 +18,15 @@ class Blackjack extends Component {
             win: false,
             lose: false,
             logArr: [],
-            blackjack: false
+            blackjack: false,
+            playerAces: 0,
+            dealerAces: 0
         }
         this.fullDeck = [
-                    ['AceSpades',1],['2Spades',2],['3Spades',3],['4Spades',4],['5Spades',5],['6Spades',6],['7Spades',7],['8Spades',8],['9Spades',9],['10Spades',10],['JackSpades',10],['QueenSpades',10],['KingSpades',10],
-                    ['AceClubs',1],['2Clubs',2],['3Clubs',3],['4Clubs',4],['5Clubs',5],['6Clubs',6],['7Clubs',7],['8Clubs',8],['9Clubs',9],['10Clubs',10],['JackClubs',10],['QueenClubs',10],['KingClubs',10],
-                    ['AceDiamonds',1],['2Diamonds',2],['3Diamonds',3],['4Diamonds',4],['5Diamonds',5],['6Diamonds',6],['7Diamonds',7],['8Diamonds',8],['9Diamonds',9],['10Diamonds',10],['JackDiamonds',10],['QueenDiamonds',10],['KingDiamonds',10],
-                    ['AceHearts',1],['2Hearts',2],['3Hearts',3],['4Hearts',4],['5Hearts',5],['6Hearts',6],['7Hearts',7],['8Hearts',8],['9Hearts',9],['10Hearts',10],['JackHearts',10],['QueenHearts',10],['KingHearts',10],
+                    ['Ace_Spades',1],['2_Spades',2],['3_Spades',3],['4_Spades',4],['5_Spades',5],['6_Spades',6],['7_Spades',7],['8_Spades',8],['9_Spades',9],['10_Spades',10],['Jack_Spades',10],['Queen_Spades',10],['King_Spades',10],
+                    ['Ace_Clubs',1],['2_Clubs',2],['3_Clubs',3],['4_Clubs',4],['5_Clubs',5],['6_Clubs',6],['7_Clubs',7],['8_Clubs',8],['9_Clubs',9],['10_Clubs',10],['Jack_Clubs',10],['Queen_Clubs',10],['King_Clubs',10],
+                    ['Ace_Diamonds',1],['2_Diamonds',2],['3_Diamonds',3],['4_Diamonds',4],['5_Diamonds',5],['6_Diamonds',6],['7_Diamonds',7],['8_Diamonds',8],['9_Diamonds',9],['10_Diamonds',10],['Jack_Diamonds',10],['Queen_Diamonds',10],['King_Diamonds',10],
+                    ['Ace_Hearts',1],['2_Hearts',2],['3_Hearts',3],['4_Hearts',4],['5_Hearts',5],['6_Hearts',6],['7_Hearts',7],['8_Hearts',8],['9_Hearts',9],['10_Hearts',10],['Jack_Hearts',10],['Queen_Hearts',10],['King_Hearts',10],
                 ]         
     }
     render() {
@@ -50,11 +54,16 @@ class Blackjack extends Component {
                         </h4>
                         <p>Hand Value: {this.state.dealerValue}
                         </p>
-                        <h4>Player's Hand: 
-                            {this.state.playerHand.map((card)=>{
-                                return " " + card[0]
+                        <h4>Player's Hand:</h4> 
+                        <div className='FlexRow'>
+                            {this.state.playerHand.map((card,i)=>{
+                                return (
+                                    <BlackjackCard key={i} value={card[1]} name={card[0]}/>
+                                )
                             })}
-                        </h4>
+                        
+                        </div>
+                            
                         <p>Hand Value: {this.state.playerValue}</p>
                         {this.hitButton()}
                         {this.stayButton()}
@@ -107,6 +116,7 @@ class Blackjack extends Component {
         let value=this.state.playerValue
         let card=arr.pop()
         value+=card[1]
+        this.playerAceCheck(card)
         hand.push(card)
         let bust = false
         let blackjack = false
@@ -130,6 +140,16 @@ class Blackjack extends Component {
         }, ()=>this.checkWin())
     }
 
+    playerAceCheck = (card) => {
+        let name=card[0].split('_')[0]
+        let count=this.state.playerAces+1
+        if (name==='Ace') {
+            this.setState({
+                playerAces:count
+            },console.log(this.state.playerAces))
+        }
+    }
+
     newHand = () => {
         this.setState({
             playerHand:[],
@@ -147,8 +167,6 @@ class Blackjack extends Component {
     checkWin = () => {
         const playerValue=this.state.playerValue
         const dealerValue=this.state.dealerValue
-        console.log(playerValue)
-        console.log(dealerValue)
             if (playerValue>21) {
                 this.addToLog("Player Bust",'lose')
             } else if (dealerValue>21) {
