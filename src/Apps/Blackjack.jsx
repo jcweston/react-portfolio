@@ -23,10 +23,10 @@ class Blackjack extends Component {
             dealerAces: 0
         }
         this.fullDeck = [
-                    ['Ace_Spades',1],['2_Spades',2],['3_Spades',3],['4_Spades',4],['5_Spades',5],['6_Spades',6],['7_Spades',7],['8_Spades',8],['9_Spades',9],['10_Spades',10],['Jack_Spades',10],['Queen_Spades',10],['King_Spades',10],
-                    ['Ace_Clubs',1],['2_Clubs',2],['3_Clubs',3],['4_Clubs',4],['5_Clubs',5],['6_Clubs',6],['7_Clubs',7],['8_Clubs',8],['9_Clubs',9],['10_Clubs',10],['Jack_Clubs',10],['Queen_Clubs',10],['King_Clubs',10],
-                    ['Ace_Diamonds',1],['2_Diamonds',2],['3_Diamonds',3],['4_Diamonds',4],['5_Diamonds',5],['6_Diamonds',6],['7_Diamonds',7],['8_Diamonds',8],['9_Diamonds',9],['10_Diamonds',10],['Jack_Diamonds',10],['Queen_Diamonds',10],['King_Diamonds',10],
-                    ['Ace_Hearts',1],['2_Hearts',2],['3_Hearts',3],['4_Hearts',4],['5_Hearts',5],['6_Hearts',6],['7_Hearts',7],['8_Hearts',8],['9_Hearts',9],['10_Hearts',10],['Jack_Hearts',10],['Queen_Hearts',10],['King_Hearts',10],
+                    ['Ace_Spades',11],['2_Spades',2],['3_Spades',3],['4_Spades',4],['5_Spades',5],['6_Spades',6],['7_Spades',7],['8_Spades',8],['9_Spades',9],['10_Spades',10],['Jack_Spades',10],['Queen_Spades',10],['King_Spades',10],
+                    ['Ace_Clubs',11],['2_Clubs',2],['3_Clubs',3],['4_Clubs',4],['5_Clubs',5],['6_Clubs',6],['7_Clubs',7],['8_Clubs',8],['9_Clubs',9],['10_Clubs',10],['Jack_Clubs',10],['Queen_Clubs',10],['King_Clubs',10],
+                    ['Ace_Diamonds',11],['2_Diamonds',2],['3_Diamonds',3],['4_Diamonds',4],['5_Diamonds',5],['6_Diamonds',6],['7_Diamonds',7],['8_Diamonds',8],['9_Diamonds',9],['10_Diamonds',10],['Jack_Diamonds',10],['Queen_Diamonds',10],['King_Diamonds',10],
+                    ['Ace_Hearts',11],['2_Hearts',2],['3_Hearts',3],['4_Hearts',4],['5_Hearts',5],['6_Hearts',6],['7_Hearts',7],['8_Hearts',8],['9_Hearts',9],['10_Hearts',10],['Jack_Hearts',10],['Queen_Hearts',10],['King_Hearts',10],
                 ]         
     }
     render() {
@@ -44,6 +44,7 @@ class Blackjack extends Component {
             <div className='blackjackApp'>
                 <div className='blackjackControls'>
                     <h2>Blackjack</h2>
+                    <p>{this.state.playerAces}</p>
                     <button onClick={()=>this.shuffleDeck()}>New Game (Shuffle Deck)</button>
                     <div className={gameVisibility}>
                         <p>Cards remaining in Deck: {this.state.deck.length}</p>
@@ -146,7 +147,7 @@ class Blackjack extends Component {
         if (name==='Ace') {
             this.setState({
                 playerAces:count
-            },console.log(this.state.playerAces))
+            })
         }
     }
 
@@ -164,9 +165,25 @@ class Blackjack extends Component {
         })
     }
 
+    aceHandler = () => {
+        let playerAces=this.state.playerAces
+        let playerValue=this.state.playerValue
+        while (playerAces>0 && playerValue>21) {
+            playerAces--
+            playerValue-=10
+        }
+        this.setState ({
+            playerAces:playerAces,
+            playerValue:playerValue
+        })
+        return playerValue
+    }
+
     checkWin = () => {
-        const playerValue=this.state.playerValue
+        let playerValue=this.aceHandler()
         const dealerValue=this.state.dealerValue
+        
+        
             if (playerValue>21) {
                 this.addToLog("Player Bust",'lose')
             } else if (dealerValue>21) {

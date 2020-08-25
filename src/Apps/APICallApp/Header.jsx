@@ -11,16 +11,6 @@ const Header = () => {
                         Home
                     </button>
                 </Link>
-                <Link to="graph">
-                    <button>
-                        Graph
-                    </button>
-                </Link>
-                <Link to="new">
-                    <button>
-                        New
-                    </button>
-                </Link>
             </nav>
         </div> 
         );

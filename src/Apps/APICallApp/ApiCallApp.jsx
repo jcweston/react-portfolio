@@ -33,7 +33,7 @@ class App extends Component {
          typeSearch={this.typeSearch}
          isLoading = {this.state.isLoading}
          data = {this.state.data.incidents}/>
-        <Graph path="/graph"/>
+        {/* <Graph path="/graph"/> */}
         
       </Router>
       

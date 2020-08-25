@@ -17,7 +17,7 @@ class Task extends Component {
         return ( 
             <div className="taskCard">
                 <button onClick={()=>this.props.deleteTask(this.props.task)} className="deleteButton" >
-                    <img src={deleteImg} alt="delete image"/>
+                    <img src={deleteImg} alt="delete"/>
                 </button>
                 <p className="taskText">{this.props.task}</p>
                 <button onClick={()=>this.props.taskCompleted(this.props.task)}>Completed</button>
